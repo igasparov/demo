@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public interface PlanetClient {
 
     @GetExchange("/planets")
-    Mono<PageSwapi> findAll();
+    PageSwapi findAll();
 
 
     @GetExchange("/planets/{id}")

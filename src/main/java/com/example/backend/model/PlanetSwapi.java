@@ -3,7 +3,8 @@ package com.example.backend.model;
 
 import java.util.ArrayList;
 
-public record PlanetSwapi(
+@SwapiEntity
+public record PlanetSwapi  (
         String name,
         String rotation_period,
         String orbital_period,
@@ -18,6 +19,6 @@ public record PlanetSwapi(
 //        String created,
 //        String edited,
         String url
-        ){
+        ) {
 
 }

@@ -1,6 +1,8 @@
 package com.example.backend.service;
 
-import com.example.backend.model.*;
+import com.example.backend.model.PlanetPageSwapi;
+import com.example.backend.model.PlanetSwapi;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -24,34 +26,38 @@ public class SwapiService {
     }
 
 
-//    public String parseJson() {
-//        String s = getPageFromSwapi(SWAPI + "/planets", PlanetPageSwapi.class).results().get(1);
-//        System.out.println(
-//                s
-//        );
-//        return s;
+    public PlanetPageSwapi parseJson() {
+
+        String content = String.valueOf(getPageFromSwapi(SWAPI + "/planets"));
+        System.out.println(content);
+        try {
+            return objectMapper.readValue(content, PlanetPageSwapi.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+//        return content;
+    }
+
+//    public boolean planetUpdate() {
+//        return update("/planets", Page.class);
 //    }
 
-    public boolean planetUpdate() {
-        return update("/planets", PlanetPageSwapi.class);
-    }
+//    public <T extends Page> boolean update(String entity, Class<T> elementClass) {
+//        T page = getPageFromSwapi(SWAPI + entity, elementClass);
+////        planets.addAll(page.results());
+//        while (page.next() != null) {
+//            page =getPageFromSwapi(page.next(), elementClass);
+////            planets.addAll(page.results());
+//        }
+//        return true;
+//    }
 
-    public <T extends Page> boolean update(String entity, Class<T> elementClass) {
-        T page = getPageFromSwapi(SWAPI + entity, elementClass);
-        planets.addAll(page.results());
-        while (page.next() != null) {
-            page =getPageFromSwapi(page.next(), elementClass);
-            planets.addAll(page.results());
-        }
-        return true;
-    }
-
-    private <T> T getPageFromSwapi(String uri, Class<T> elementClass) {
+    private String getPageFromSwapi(String uri) {
         return webClient
                 .get()
                 .uri(uri)
                 .retrieve()
-                .bodyToMono(elementClass)
+                .bodyToMono(String.class)
                 .block();
     }
 

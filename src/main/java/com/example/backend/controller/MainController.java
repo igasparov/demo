@@ -20,14 +20,14 @@ public class MainController {
     }
 
     @GetMapping("/planets")
-    public String planets() {
-        return swapiService.getPlanets().toString();
+    public PlanetPageSwapi planets() {
+        return swapiService.parseJson();
     }
 
-    @GetMapping("/planets/update")
-    public String updatePlanets() {
-        swapiService.planetUpdate();
-        return swapiService.getPlanets().toString();
-//        return "planets";
-    }
+//    @GetMapping("/planets/update")
+//    public String updatePlanets() {
+//        swapiService.planetUpdate();
+//        return swapiService.getPlanets().toString();
+////        return "planets";
+//    }
 }

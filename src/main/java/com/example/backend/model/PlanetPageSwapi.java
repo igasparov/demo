@@ -8,7 +8,7 @@ public record PlanetPageSwapi(
         String next,
         String previous,
         ArrayList<PlanetSwapi> results
-) implements Page {
+) implements SwapiEntity {
 
     @Override
     public boolean equals(Object obj) {

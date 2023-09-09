@@ -3,7 +3,7 @@ package com.example.backend.model;
 
 import java.util.ArrayList;
 
-@SwapiEntity
+
 public record PlanetSwapi  (
         String name,
         String rotation_period,
@@ -19,6 +19,6 @@ public record PlanetSwapi  (
 //        String created,
 //        String edited,
         String url
-        ) {
+        ) implements SwapiEntity {
 
 }

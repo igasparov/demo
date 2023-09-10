@@ -1,8 +1,9 @@
 package com.example.backend.model;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface Page {
     String next();
-    Collection<? extends PlanetSwapi> results();
+    String previous();
+    ArrayList<SwapiEntity> results();
 }

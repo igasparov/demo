@@ -1,5 +1,8 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -7,8 +10,8 @@ public record PlanetPageSwapi(
         Integer count,
         String next,
         String previous,
-        ArrayList<PlanetSwapi> results
-) implements Page {
+        ArrayList<JsonNode> results
+) implements SwapiEntity {
 
     @Override
     public boolean equals(Object obj) {

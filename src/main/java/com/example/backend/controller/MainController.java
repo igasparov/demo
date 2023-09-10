@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.PlanetPageSwapi;
 import com.example.backend.service.SwapiService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ public class MainController {
     }
 
     @GetMapping("/planets")
-    public PlanetPageSwapi planets() {
+    public String planets() {
         return swapiService.parseJson();
     }
 

@@ -2,7 +2,6 @@ package com.example.backend.service;
 
 import com.example.backend.model.PlanetPageSwapi;
 import com.example.backend.model.PlanetSwapi;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -26,16 +25,15 @@ public class SwapiService {
     }
 
 
-    public PlanetPageSwapi parseJson() {
+    public String parseJson() {
 
-        String content = String.valueOf(getPageFromSwapi(SWAPI + "/planets"));
-        System.out.println(content);
-        try {
-            return objectMapper.readValue(content, PlanetPageSwapi.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-//        return content;
+        return (getPageFromSwapi(SWAPI + "/planets")).toString();
+
+//        try {
+//            return objectMapper.readValue(content, PlanetPageSwapi.class);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 //    public boolean planetUpdate() {
@@ -52,12 +50,12 @@ public class SwapiService {
 //        return true;
 //    }
 
-    private String getPageFromSwapi(String uri) {
+    private PlanetPageSwapi getPageFromSwapi(String uri) {
         return webClient
                 .get()
                 .uri(uri)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(PlanetPageSwapi.class)
                 .block();
     }
 
